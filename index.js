@@ -37,12 +37,18 @@ module.exports = {
 		}
 		return tg;
 	},
-	'on': function(ele, event, action, downtree) {
-		if (!downtree) downtree = false;
-		if (event === 'click' && "ontouchstart" in document.documentElement) {
-			ele.addEventListener('touchend', action, downtree);
-		} else {
+	'on': function(a, b, c, d) {
+		(function(ele, event, action, downtree) {
+			if (!downtree) downtree = false;
+			if (event === 'click' && 'ontouchstart' in document.documentElement) {
+				event = 'touchend';
+			}
 			ele.addEventListener(event, action, downtree);
-		}
+			return {
+				remove: function() {
+					ele.removeEventListener(event, action, downtree);
+				}
+			}
+		})(a, b, c, d);
 	}
 }
