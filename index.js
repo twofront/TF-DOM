@@ -14,28 +14,31 @@ module.exports = {
 	'create': function(tag, info) {
 		var tg = document.createElement(tag);
 		if (info) {
-			for (var e in info) {
-				if (e === 'innerHTML' || e === 'innerText' || e === 'children' || e === 'parent') {
-					continue;
-				}
-				tg.setAttribute(e, info[e]);
-			}
-			if (info.innerHTML) {
-				tg.innerHTML = info.innerHTML;
-			}
-			if (info.innerText) {
-				tg.appendChild(document.createTextNode(info.innerText));
-			}
-			if (info.children) {
-				for (var i=0; i<info.children.length; i++) {
-					tg.appendChild(info.children[i]);
-				}
-			}
-			if (info.parent) {
-				info.parent.appendChild(tg);
-			}
+			this.update(tg, info);
 		}
 		return tg;
+	},
+	'update': function(tg, info) {
+		for (var e in info) {
+			if (e === 'innerHTML' || e === 'innerText' || e === 'children' || e === 'parent') {
+				continue;
+			}
+			tg.setAttribute(e, info[e]);
+		}
+		if (info.innerHTML) {
+			tg.innerHTML = info.innerHTML;
+		}
+		if (info.innerText) {
+			tg.appendChild(document.createTextNode(info.innerText));
+		}
+		if (info.children) {
+			for (var i=0; i<info.children.length; i++) {
+				tg.appendChild(info.children[i]);
+			}
+		}
+		if (info.parent) {
+			info.parent.appendChild(tg);
+		}
 	},
 	'on': function(a, b, c, d) {
 		(function(ele, event, action, downtree) {
