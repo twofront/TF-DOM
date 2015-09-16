@@ -39,6 +39,7 @@ module.exports = {
 		if (info.parent) {
 			info.parent.appendChild(tg);
 		}
+		return this;
 	},
 	'on': function(a, b, c, d) {
 		(function(ele, event, action, downtree) {
@@ -53,5 +54,6 @@ module.exports = {
 				}
 			}
 		})(a, b, c, d);
+		return this;
 	}
 }
