@@ -55,5 +55,11 @@ module.exports = {
 			}
 		})(a, b, c, d);
 		return this;
+	},
+	'addClass': function(el, cl) {
+		el.setAttribute('class', el.getAttribute('class')+' '+cl);
+	},
+	'removeClass': function(el, cl) {
+		el.setAttribute('class', el.getAttribute('class').replace(new RegExp('\\s*'+cl+'(\\s*)'), '$1').replace(/^\s+/, ''));
 	}
 }
