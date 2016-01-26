@@ -61,5 +61,19 @@ module.exports = {
 	},
 	'removeClass': function(el, cl) {
 		el.setAttribute('class', el.getAttribute('class').replace(new RegExp('\\s*'+cl+'(\\s*)'), '$1').replace(/^\s+/, ''));
+	},
+	'getPosition': function(ele) {
+		var last = [0,0];
+		if (ele.parentNode) last = this.getPosition(ele.parentNode);
+		if (ele.offsetLeft) last[0] += ele.offsetLeft;
+		if (ele.offsetTop) last[1] += ele.offsetTop;
+		return last;
+	},
+	'getScroll': function(ele) {
+		var last = [0,0];
+		if (ele.parentNode) last = this.getScroll(ele.parentNode);
+		if (ele.scrollLeft) last[0] += ele.scrollLeft;
+		if (ele.scrollTop) last[1] += ele.scrollTop;
+		return last;
 	}
 }
