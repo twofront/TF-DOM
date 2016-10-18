@@ -1,5 +1,5 @@
 
-module.exports = {
+var dom = {
 	'get': function(id) {
 		if (arguments.length === 1) {
 			return document.getElementById(id);
@@ -77,3 +77,5 @@ module.exports = {
 		return last;
 	}
 }
+
+if (module && module.exports) module.exports = dom;
