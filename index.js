@@ -12,7 +12,12 @@ module.exports = {
 		}
 	},
 	'create': function(tag, info) {
-		var tg = document.createElement(tag);
+		var tg = null;
+		if (info && info.ns) {
+			tg = document.createElementNS(info.ns, tag);
+		} else {
+			tg = document.createElement(tag);
+		}
 		if (info) {
 			this.update(tg, info);
 		}
@@ -57,10 +62,11 @@ module.exports = {
 		return this;
 	},
 	'addClass': function(el, cl) {
+		module.exports.removeClass(el, cl);
 		el.setAttribute('class', el.getAttribute('class')+' '+cl);
 	},
 	'removeClass': function(el, cl) {
-		el.setAttribute('class', el.getAttribute('class').replace(new RegExp('\\s*'+cl+'(\\s*)'), '$1').replace(/^\s+/, ''));
+		el.setAttribute('class', (el.getAttribute('class')||'').replace(new RegExp('\\s*'+cl+'(\\s*)'), '$1').replace(/^\s+/, ''));
 	},
 	'getPosition': function(ele) {
 		var last = [0,0];
