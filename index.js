@@ -47,11 +47,11 @@ var dom = {
 		return this;
 	},
 	'on': function(a, b, c, d) {
-		(function(ele, event, action, downtree) {
+		return (function(ele, event, action, downtree) {
 			if (!downtree) downtree = false;
-			if (event === 'click' && 'ontouchstart' in document.documentElement) {
-				event = 'touchend';
-			}
+			//if (event === 'click' && 'ontouchstart' in document.documentElement) {
+			//	event = 'touchend';
+			//}
 			ele.addEventListener(event, action, downtree);
 			return {
 				remove: function() {
@@ -59,7 +59,6 @@ var dom = {
 				}
 			}
 		})(a, b, c, d);
-		return this;
 	},
 	'addClass': function(el, cl) {
 		module.exports.removeClass(el, cl);
